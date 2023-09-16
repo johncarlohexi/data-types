@@ -55,7 +55,7 @@ function pushToData(user) {
             cartItems: user.cartItems
         }
     }  
-}
+};
 
 
 
