@@ -18,6 +18,16 @@ let customerData = {
     }
 }
 
+function checkName() {
+    for (const key in customerData) {
+        if (customerData[key].name.includes(newCreatedUser.name)) {
+            console.log("already")
+            return true;
+        }
+    }
+    return false
+}
+
 function NewUser(name, balance, cartItems) {
     this.name = name;
     this.balance = balance;
@@ -28,8 +38,8 @@ const btn = document.getElementById("submit")
 
 btn.addEventListener("click", () => {
     createNewUser()
+    checkName()
     pushToData(newCreatedUser)
-
     console.table(customerData)
 })
 
@@ -47,6 +57,10 @@ function createNewUser() {
 function pushToData(user) {
     if (user instanceof NewUser) {
 
+        if(checkName(user.name)) {
+            return;
+        }
+
         const userId = "user" + Math.floor(Math.random() * 10000)
 
         customerData[userId] = {
@@ -54,7 +68,7 @@ function pushToData(user) {
             balance: user.balance + " " + availableCurrency.yen,
             cartItems: user.cartItems
         }
-    }  
+    }
 };
 
 
